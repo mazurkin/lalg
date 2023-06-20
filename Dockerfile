@@ -22,4 +22,4 @@ VOLUME ["/tmp"]
 # application
 WORKDIR /opt/lalg/
 ENTRYPOINT ["/opt/java/openjdk/bin/java"]
-CMD ["-cp", "benchmarks.jar", "org.winrateperf.benchmark.inference.NeuralBenchmarkRunnerFull"]
+CMD ["-cp", "benchmarks.jar", "org.github.mazurkin.benchmark.inference.NeuralBenchmarkRunnerFull"]

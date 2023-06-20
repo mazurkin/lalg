@@ -2,7 +2,6 @@ package org.github.mazurkin.benchmark.inference;
 
 import org.github.mazurkin.domain.NeuralBlasInference;
 import org.github.mazurkin.domain.NeuralInference;
-import org.github.mazurkin.domain.NeuralJavaInference;
 import org.github.mazurkin.domain.NeuralLalgInference;
 import org.github.mazurkin.domain.NeuralUtils;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -39,8 +38,6 @@ public class NeuralBenchmark {
     @State(Scope.Benchmark)
     public static class Inferences {
 
-        private NeuralInference javaInference;
-
         private NeuralInference blasInference;
 
         private NeuralInference lalgInference;
@@ -67,7 +64,6 @@ public class NeuralBenchmark {
 
             double[] bias2 = NeuralUtils.buildBias2();
 
-            this.javaInference = new NeuralJavaInference(embeddingList, transposedLayer1, transposedLayer2, bias1, bias2);
             this.blasInference = new NeuralBlasInference(embeddingList, transposedLayer1, transposedLayer2, bias1, bias2);
             this.lalgInference = new NeuralLalgInference(embeddingList, transposedLayer1, transposedLayer2, bias1, bias2);
 
@@ -93,13 +89,6 @@ public class NeuralBenchmark {
 
             return array[index++];
         }
-    }
-
-    @Benchmark
-    @SuppressWarnings("unused")
-    public double[] testJavaInference(Inferences inferences, Inputs inputs) {
-        int[] input = inputs.next(inferences.inputs);
-        return inferences.javaInference.compute(input);
     }
 
     @Benchmark
